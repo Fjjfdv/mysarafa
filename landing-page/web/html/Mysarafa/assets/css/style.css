@@ -4413,8 +4413,8 @@ hr {
   }
 }
 .logo-img{
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 86px;
+  max-height: 101px;
 }
 /*--------------------------------------------------------------
   14. Cards
@@ -4548,14 +4548,14 @@ hr {
   }
 }
 
-.cs_card.cs_style_2 .cs_card_thumbnail {
+/* .cs_card.cs_style_2 .cs_card_thumbnail {
   width: calc(48vw + 12px);
   border: 10px solid var(--heading-color);
   border-right: 0;
   border-radius: 20px 0 0 20px;
   position: sticky;
   top: 20px;
-}
+} */
 .cs_card.cs_style_2 .cs_card_thumbnail img {
   width: 100%;
   border-radius: inherit;
@@ -7111,4 +7111,9 @@ height: 354px;}
   font-size: 16px;
   color: #333;
   margin-bottom: 20px;
+}
+
+.cs_gap{
+  
+  line-height: 50px;
 }
