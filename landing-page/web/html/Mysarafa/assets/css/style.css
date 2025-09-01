@@ -1735,7 +1735,7 @@ textarea {
 
 .cs_accent_bg {
   background-color: var(--accent-color);
-  height: 300px;
+  height: auto;
 }
 
 .cs_gray_bg {
