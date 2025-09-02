@@ -1,8 +1,6 @@
-# flyctl launch added from .gitignore
-**\node_modules
-
-**\package.json
-**\package-lock.json
-
-**\server.js
+.git
+.gitignore
+Dockerfile
 fly.toml
+node_modules
+*.log
