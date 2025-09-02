@@ -3112,7 +3112,10 @@ hr {
 .cs_site_header_style_1 .cs_nav + .cs_header_toolbox.cs_center {
   margin-left: 35px;
 }
-
+.custom-container{
+  padding-right: calc(var(--bs-gutter-x) * .5) none;
+  padding-left: calc(var(--bs-gutter-x) * .5)   none;
+}
 @media screen and (max-width: 1399px) {
   .cs_site_header.cs_style_1 {
     padding: 0 15px;
