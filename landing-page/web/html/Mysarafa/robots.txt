@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mysarafa.com/sitemap.xml
