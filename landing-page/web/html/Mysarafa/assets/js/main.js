@@ -435,49 +435,48 @@
     }
   }
   /*--------------------------------------------------------------
-    13. Dynamic contact form
-  --------------------------------------------------------------*/
-  if ($.exists('#cs_form')) {
-    const form = document.getElementById('cs_form');
-    const result = document.getElementById('cs_result');
+    13. Dynamic contact form/*--------------------------------------------------------------*/
+if ($.exists('#cs_form')) {
+  const form = document.getElementById('cs_form');
+  const result = document.getElementById('cs_result');
 
-    form.addEventListener('submit', function (e) {
-      const formData = new FormData(form);
-      e.preventDefault();
-      var object = {};
-      formData.forEach((value, key) => {
-        object[key] = value;
-      });
-      var json = JSON.stringify(object);
-      result.innerHTML = 'Please wait...';
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: json,
-      })
-        .then(async response => {
-          let json = await response.json();
-          if (response.status == 200) {
-            result.innerHTML = json.message;
-          } else {
-            console.log(response);
-            result.innerHTML = json.message;
-          }
-        })
-        .catch(error => {
-          console.log(error);
-          result.innerHTML = 'Something went wrong!';
-        })
-        .then(function () {
-          form.reset();
-          setTimeout(() => {
-            result.style.display = 'none';
-          }, 5000);
-        });
+    const formData = new FormData(form);
+    const object = {};
+    formData.forEach((value, key) => {
+      object[key] = value;
     });
-  }
+
+    result.innerHTML = 'Please wait...';
+
+    fetch('https://app.mysarafa.com/superadmin/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(object),
+    })
+      .then(async response => {
+        let json = await response.json();
+        if (response.ok) {
+          result.innerHTML = `<span style="color:green;">${json.message}</span>`;
+        } else {
+          result.innerHTML = `<span style="color:red;">${json.message}</span>`;
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        result.innerHTML = '<span style="color:red;">Something went wrong!</span>';
+      })
+      .finally(() => {
+        form.reset();
+        setTimeout(() => {
+          result.style.display = 'none';
+        }, 5000);
+      });
+  });
+}
 })(jQuery); // End of use strict
