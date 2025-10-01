@@ -438,7 +438,6 @@
     13. Dynamic contact form/*--------------------------------------------------------------*/
 if ($.exists('#cs_form')) {
   const form = document.getElementById('cs_form');
-  const result = document.getElementById('cs_result');
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -449,7 +448,14 @@ if ($.exists('#cs_form')) {
       object[key] = value;
     });
 
-    result.innerHTML = 'Please wait...';
+    Swal.fire({
+      title: 'Submitting...',
+      text: 'Please wait while we process your request.',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
 
     fetch('https://app.mysarafa.com/superadmin/contact', {
       method: 'POST',
@@ -462,21 +468,33 @@ if ($.exists('#cs_form')) {
       .then(async response => {
         let json = await response.json();
         if (response.ok) {
-          result.innerHTML = `<span style="color:green;">${json.message}</span>`;
+          Swal.fire({
+            icon: 'success',
+            title: 'Submitted!',
+            text: json.message,
+            confirmButtonColor: '#3085d6'
+          });
         } else {
-          result.innerHTML = `<span style="color:red;">${json.message}</span>`;
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: json.message,
+            confirmButtonColor: '#d33'
+          });
         }
       })
       .catch(error => {
         console.error(error);
-        result.innerHTML = '<span style="color:red;">Something went wrong!</span>';
+        Swal.fire({
+          icon: 'error',
+          title: 'Something went wrong!',
+          text: 'Please try again later.',
+          confirmButtonColor: '#d33'
+        });
       })
       .finally(() => {
         form.reset();
-        setTimeout(() => {
-          result.style.display = 'none';
-        }, 5000);
       });
   });
 }
-})(jQuery); // End of use strict
+})(jQuery); 
